@@ -68,7 +68,7 @@ npm start
 ### Products
 
 * `GET /api/products`
-  Get all products (supports filtering, pagination, sorting)
+  Get all products (supports filtering, sorting)
 
 * `GET /api/products/:id`
   Get a single product
