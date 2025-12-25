@@ -112,13 +112,24 @@ router.get("/:id/related", async (req, res) => {
 router.use(requireAdmin)
 
 // CREATE
+// CREATE
 router.post("/", upload.single("image"), async (req, res) => {
   try {
-    if (!req.file) {
-      return res.status(400).json({ error: "Product image is required" })
+    let imageUrl = null
+
+    // Case 1: uploaded file (admin panel)
+    if (req.file) {
+      imageUrl = await uploadToCloudinary(req.file.buffer)
     }
 
-    const imageUrl = await uploadToCloudinary(req.file.buffer)
+    // Case 2: seeded / static image
+    if (!imageUrl && req.body.imageUrl) {
+      imageUrl = req.body.imageUrl
+    }
+
+    if (!imageUrl) {
+      return res.status(400).json({ error: "Product image is required" })
+    }
 
     const product = new Product({
       name: req.body.name,
@@ -140,6 +151,7 @@ router.post("/", upload.single("image"), async (req, res) => {
     res.status(400).json({ error: error.message })
   }
 })
+
 
 // UPDATE
 router.put("/:id", upload.single("image"), async (req, res) => {
