@@ -30,9 +30,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Admin-protected endpoints
-router.use(requireAdmin);
-
 router.post("/", async (req, res) => {
   try {
     const review = new Review(req.body);

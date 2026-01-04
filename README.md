@@ -1,11 +1,17 @@
+# LCF Furniture Backend API
 
+Backend API for the LCF Furniture e-commerce platform built with the MERN stack.
 
 ---
 
-````md
-# LCF Furniture Backend API
+## Tech Stack
 
-MERN stack backend for the LCF Furniture e-commerce platform.
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- Cloudinary (image storage)
 
 ---
 
@@ -15,7 +21,7 @@ MERN stack backend for the LCF Furniture e-commerce platform.
 
 ```bash
 npm install
-````
+```
 
 ---
 
@@ -23,18 +29,46 @@ npm install
 
 Create a `.env` file inside the `backend` directory.
 
-#### Local MongoDB
+#### Required Environment Variables
+
+```env
+MONGODB_URI=
+PORT=
+CORS_ORIGIN=
+JWT_SECRET=
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+```
+
+---
+
+#### Example: Local MongoDB
 
 ```env
 MONGODB_URI=mongodb://localhost:27017/lcf-furniture
 PORT=5000
+CORS_ORIGIN=http://localhost:3000
+JWT_SECRET=your_strong_jwt_secret
+
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 ```
 
-#### MongoDB Atlas (Cloud)
+---
+
+#### Example: MongoDB Atlas (Cloud)
 
 ```env
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/lcf-furniture
 PORT=5000
+CORS_ORIGIN=https://your-frontend-domain.com
+JWT_SECRET=your_strong_jwt_secret
+
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 ```
 
 ---
@@ -49,13 +83,13 @@ npm run seed
 
 ### 4. Start the Server
 
-#### Development mode (auto-restart)
+#### Development Mode
 
 ```bash
 npm run dev
 ```
 
-#### Production mode
+#### Production Mode
 
 ```bash
 npm start
@@ -67,116 +101,113 @@ npm start
 
 ### Products
 
-* `GET /api/products`
-  Get all products (supports filtering, sorting)
+- `GET /api/products`  
+  Retrieve all products (supports filtering and sorting)
 
-* `GET /api/products/:id`
-  Get a single product
+- `GET /api/products/:id`  
+  Retrieve a single product
 
-* `POST /api/products`
+- `POST /api/products`  
   Create a new product
 
-* `PUT /api/products/:id`
+- `PUT /api/products/:id`  
   Update a product
 
-* `DELETE /api/products/:id`
+- `DELETE /api/products/:id`  
   Delete a product
 
-* `GET /api/products/:id/related`
-  Get related products
+- `GET /api/products/:id/related`  
+  Retrieve related products
 
 ---
 
 ### Categories
 
-* `GET /api/categories`
-* `GET /api/categories/:name`
-* `POST /api/categories`
-* `PUT /api/categories/:id`
-* `DELETE /api/categories/:id`
+- `GET /api/categories`
+- `GET /api/categories/:name`
+- `POST /api/categories`
+- `PUT /api/categories/:id`
+- `DELETE /api/categories/:id`
 
 ---
 
 ### Reviews
 
-* `GET /api/reviews`
-* `GET /api/reviews/:id`
-* `POST /api/reviews`
-* `PUT /api/reviews/:id`
-* `DELETE /api/reviews/:id`
+- `GET /api/reviews`
+- `GET /api/reviews/:id`
+- `POST /api/reviews`
+- `PUT /api/reviews/:id`
+- `DELETE /api/reviews/:id`
 
 ---
 
 ### Hero Slides
 
-* `GET /api/hero-slides`
-* `GET /api/hero-slides/:id`
-* `POST /api/hero-slides`
-* `PUT /api/hero-slides/:id`
-* `DELETE /api/hero-slides/:id`
+- `GET /api/hero-slides`
+- `GET /api/hero-slides/:id`
+- `POST /api/hero-slides`
+- `PUT /api/hero-slides/:id`
+- `DELETE /api/hero-slides/:id`
 
 ---
 
 ### Page Content
 
-* `GET /api/page-content/:pageName`
-  Retrieve content for pages like `about`, `contact`, `home`
+- `GET /api/page-content/:pageName`  
+  Retrieve page content (`home`, `about`, `contact`, etc.)
 
-* `POST /api/page-content/:pageName`
+- `POST /api/page-content/:pageName`  
   Create or update page content
+
+---
+
+## Image Uploads
+
+- Product images and hero slides are uploaded to **Cloudinary**
+- Requires valid Cloudinary credentials in environment variables
+- Images are stored remotely, not on the server filesystem
 
 ---
 
 ## Deployment
 
-### Deploy to Railway / Render / Heroku
+### Supported Platforms
 
-1. Create an account on your chosen platform
+- Railway
+- Render
+- Heroku
+
+### Deployment Steps
+
+1. Create an account on the platform
 2. Connect the backend GitHub repository
-3. Set environment variables:
-
-   * `MONGODB_URI`
-   * `PORT`
+3. Set all required environment variables:
+   - `MONGODB_URI`
+   - `PORT`
+   - `CORS_ORIGIN`
+   - `JWT_SECRET`
+   - `CLOUDINARY_CLOUD_NAME`
+   - `CLOUDINARY_API_KEY`
+   - `CLOUDINARY_API_SECRET`
 4. Deploy the service
 
 ---
 
 ## MongoDB Atlas Setup
 
-1. Create an account at
-   [https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas)
+1. Create an account at https://www.mongodb.com/cloud/atlas
 2. Create a cluster
 3. Create a database user
-4. Whitelist your deployment IP
+4. Whitelist deployment IP
 5. Copy the connection string
-6. Add it to your backend environment variables
+6. Add it to `MONGODB_URI`
 
 ---
 
 ## Notes
 
-* This backend **must not** be deployed on Vercel
-* Use Railway or Render for stable long-running Node servers
-* Frontend and admin panel should consume this API via `NEXT_PUBLIC_API_URL`
+- This backend must **not** be deployed on Vercel
+- Designed for long-running Node.js servers
+- Frontend and admin panel should consume the API using `NEXT_PUBLIC_API_URL`
+- Missing environment variables will crash the server intentionally
 
-```
-
----
-
-### Why your original looked “wrong”
-
-- Random trailing `#` at the end breaks Markdown rendering
-- No section separators, so everything collapsed visually
-- Inconsistent code fences
-- Atlas example mixed with local config
-- Markdown renderers are strict, not sympathetic
-
-This version will render correctly on:
-- GitHub
-- GitLab
-- Vercel
-- Railway
-- Any Markdown viewer that isn’t drunk
-
-Now the README is not the problem anymore. The tooling chaos is.
-```
