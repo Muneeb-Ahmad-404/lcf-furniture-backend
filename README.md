@@ -48,7 +48,7 @@ CLOUDINARY_API_SECRET=
 ```env
 MONGODB_URI=mongodb://localhost:27017/lcf-furniture
 PORT=5000
-CORS_ORIGIN=http://localhost:3000
+CORS_ORIGIN=http://localhost:3000, http://localhost:3001
 JWT_SECRET=your_strong_jwt_secret
 
 CLOUDINARY_CLOUD_NAME=your_cloud_name
@@ -63,7 +63,7 @@ CLOUDINARY_API_SECRET=your_api_secret
 ```env
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/lcf-furniture
 PORT=5000
-CORS_ORIGIN=https://your-frontend-domain.com
+CORS_ORIGIN=https://your-frontend-domain.com, https://your-admin-panel-domain.com
 JWT_SECRET=your_strong_jwt_secret
 
 CLOUDINARY_CLOUD_NAME=your_cloud_name
