@@ -40,18 +40,6 @@ CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
 ```
-#### Environment Variables Values
-```
-MONGODB_URI=mongodb+srv://muneebahmad2005p_db_user:UwUrbNJSXqWLPLbI@cluster0.krai7vd.mongodb.net/?appName=Cluster0
-PORT=5000
-CORS_ORIGIN=http://localhost:3000,http://localhost:3001
-JWT_SECRET=thewheelsonthebusgoesroundandroundallthewaylong
-CLOUDINARY_CLOUD_NAME=djzgaprfs
-CLOUDINARY_API_KEY=628828355133194
-CLOUDINARY_API_SECRET=OmLhmJ1gDs1_R3yM338Uex21EaA
-```
----
-
 #### Example: Local MongoDB
 
 ```env
