@@ -1,17 +1,39 @@
 # LCF Furniture Backend API
 
-Backend API for the LCF Furniture e-commerce platform built with the MERN stack.
+Backend API for the LCF Furniture e-commerce platform built with Node.js, Express, and MongoDB. This backend is part of a **three-tier architecture system** consisting of a customer-facing frontend, admin panel, and backend API.
 
 ---
 
 ## Tech Stack
 
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- JWT Authentication
-- Cloudinary (image storage)
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* JWT Authentication
+* Cloudinary (image storage)
+
+---
+
+## System Architecture
+
+LCF is designed as a three-tier e-commerce system:
+
+* **Frontend:** Customer-facing Next.js application
+* **Backend (this repository):** Business logic, authentication, and database operations
+* **Admin Panel:** Product, category, and content management system
+
+This backend serves both frontend and admin panel through REST APIs.
+
+---
+
+## Authentication & Security
+
+* JWT-based authentication for protected routes
+* Role-based access control for admin functionality
+* CORS configuration for frontend and admin panel access
+* Secure environment variable management
+* Cloud-based media handling via Cloudinary
 
 ---
 
@@ -27,9 +49,9 @@ npm install
 
 ### 2. Configure Environment Variables
 
-Create a `.env` file inside the `backend` directory.
+Create a `.env` file in the backend directory.
 
-#### Required Environment Variables
+#### Required Variables
 
 ```env
 MONGODB_URI=
@@ -40,12 +62,15 @@ CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
 ```
-#### Example: Local MongoDB
+
+---
+
+#### Local Development Example
 
 ```env
 MONGODB_URI=mongodb://localhost:27017/lcf-furniture
 PORT=5000
-CORS_ORIGIN=http://localhost:3000, http://localhost:3001
+CORS_ORIGIN=http://localhost:3000,http://localhost:3001
 JWT_SECRET=your_strong_jwt_secret
 
 CLOUDINARY_CLOUD_NAME=your_cloud_name
@@ -55,12 +80,12 @@ CLOUDINARY_API_SECRET=your_api_secret
 
 ---
 
-#### Example: MongoDB Atlas (Cloud)
+#### Production Example (MongoDB Atlas)
 
 ```env
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/lcf-furniture
 PORT=5000
-CORS_ORIGIN=https://your-frontend-domain.com, https://your-admin-panel-domain.com
+CORS_ORIGIN=https://your-frontend-domain.com,https://your-admin-domain.com
 JWT_SECRET=your_strong_jwt_secret
 
 CLOUDINARY_CLOUD_NAME=your_cloud_name
@@ -70,7 +95,9 @@ CLOUDINARY_API_SECRET=your_api_secret
 
 ---
 
-### 3. Seed the Database
+## Database Setup
+
+### Seed Database (optional)
 
 ```bash
 npm run seed
@@ -78,15 +105,15 @@ npm run seed
 
 ---
 
-### 4. Start the Server
+## Running the Server
 
-#### Development Mode
+### Development Mode
 
 ```bash
 npm run dev
 ```
 
-#### Production Mode
+### Production Mode
 
 ```bash
 npm start
@@ -98,71 +125,56 @@ npm start
 
 ### Products
 
-- `GET /api/products`  
-  Retrieve all products (supports filtering and sorting)
-
-- `GET /api/products/:id`  
-  Retrieve a single product
-
-- `POST /api/products`  
-  Create a new product
-
-- `PUT /api/products/:id`  
-  Update a product
-
-- `DELETE /api/products/:id`  
-  Delete a product
-
-- `GET /api/products/:id/related`  
-  Retrieve related products
+* `GET /api/products` – Get all products (supports filtering & sorting)
+* `GET /api/products/:id` – Get single product
+* `POST /api/products` – Create product (admin only)
+* `PUT /api/products/:id` – Update product (admin only)
+* `DELETE /api/products/:id` – Delete product (admin only)
+* `GET /api/products/:id/related` – Get related products
 
 ---
 
 ### Categories
 
-- `GET /api/categories`
-- `GET /api/categories/:name`
-- `POST /api/categories`
-- `PUT /api/categories/:id`
-- `DELETE /api/categories/:id`
+* `GET /api/categories`
+* `GET /api/categories/:name`
+* `POST /api/categories` (admin only)
+* `PUT /api/categories/:id` (admin only)
+* `DELETE /api/categories/:id` (admin only)
 
 ---
 
 ### Reviews
 
-- `GET /api/reviews`
-- `GET /api/reviews/:id`
-- `POST /api/reviews`
-- `PUT /api/reviews/:id`
-- `DELETE /api/reviews/:id`
+* `GET /api/reviews`
+* `GET /api/reviews/:id`
+* `POST /api/reviews`
+* `PUT /api/reviews/:id`
+* `DELETE /api/reviews/:id`
 
 ---
 
 ### Hero Slides
 
-- `GET /api/hero-slides`
-- `GET /api/hero-slides/:id`
-- `POST /api/hero-slides`
-- `PUT /api/hero-slides/:id`
-- `DELETE /api/hero-slides/:id`
+* `GET /api/hero-slides`
+* `POST /api/hero-slides` (admin only)
+* `PUT /api/hero-slides/:id` (admin only)
+* `DELETE /api/hero-slides/:id`
 
 ---
 
 ### Page Content
 
-- `GET /api/page-content/:pageName`  
-  Retrieve page content (`home`, `about`, `contact`, etc.)
-
-- `POST /api/page-content/:pageName`  
-  Create or update page content
+* `GET /api/page-content/:pageName`
+* `POST /api/page-content/:pageName` (create/update)
 
 ---
 
 ## Image Uploads
 
-- Product images and hero slides are uploaded to **Cloudinary**
-- Requires valid Cloudinary credentials in environment variables
-- Images are stored remotely, not on the server filesystem
+* Product and hero images are uploaded to **Cloudinary**
+* No local file storage is used
+* Requires valid Cloudinary credentials in environment variables
 
 ---
 
@@ -170,41 +182,43 @@ npm start
 
 ### Supported Platforms
 
-- Railway
-- Render
-- Heroku
+* Railway
+* Render
+* Heroku
 
 ### Deployment Steps
 
-1. Create an account on the platform
-2. Connect the backend GitHub repository
-3. Set all required environment variables:
-   - `MONGODB_URI`
-   - `PORT`
-   - `CORS_ORIGIN`
-   - `JWT_SECRET`
-   - `CLOUDINARY_CLOUD_NAME`
-   - `CLOUDINARY_API_KEY`
-   - `CLOUDINARY_API_SECRET`
-4. Deploy the service
+1. Connect repository to platform
+2. Configure environment variables:
+
+   * `MONGODB_URI`
+   * `PORT`
+   * `CORS_ORIGIN`
+   * `JWT_SECRET`
+   * `CLOUDINARY_*`
+3. Deploy Node.js service
 
 ---
 
 ## MongoDB Atlas Setup
 
-1. Create an account at https://www.mongodb.com/cloud/atlas
-2. Create a cluster
-3. Create a database user
-4. Whitelist deployment IP
-5. Copy the connection string
-6. Add it to `MONGODB_URI`
+1. Create cluster at [https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas)
+2. Create database user
+3. Configure IP whitelist
+4. Copy connection string
+5. Add to `MONGODB_URI`
 
 ---
 
 ## Notes
 
-- This backend must **not** be deployed on Vercel
-- Designed for long-running Node.js servers
-- Frontend and admin panel should consume the API using `NEXT_PUBLIC_API_URL`
-- Missing environment variables will crash the server intentionally
+* Backend is designed for long-running Node.js deployment environments
+* Not intended for serverless platforms like Vercel
+* Frontend and admin panel consume this API via `NEXT_PUBLIC_API_URL`
+* Missing environment variables will prevent server initialization
 
+---
+
+## Result
+
+This backend is part of a full three-tier e-commerce system with authentication, admin controls, and cloud-based media handling.
